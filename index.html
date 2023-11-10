@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,800;0,900;1,600&display=swap" rel="stylesheet">
+    <title>Musik Kesukaan</title>
+
+    <style>
+        body{
+            background: #111;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #lyrics-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        #lyrics {
+            position: absolute;
+            top: 20%;
+            transform: translateY(-50%);
+            width: 100%;
+            text-align: center;
+            font-size: 35px;
+            color: #fff;
+            text-shadow: 0 0 12px aqua, 0 0 50px aqua;
+            padding: 10px 15px;
+        }
+
+        span {
+            text-align: center;
+            font-size: 50px;
+            top: 40%;
+            transform: translateY(-50%);
+            animation: glow 3.5s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 12px pink , 0 0 100px pink;
+                color: #fff;
+            }
+            10%, 90% {
+                text-shadow: none;
+                color: #111;
+            }
+        }
+
+        span:nth-child(2) {
+            animation-delay: .2s;
+        }
+        span:nth-child(3) {
+            animation-delay: .4s;
+        }
+        span:nth-child(4) {
+            animation-delay: .6s;
+        }
+        span:nth-child(5) {
+            animation-delay: .8s;
+        }
+
+        .musicc {
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; color: #fff; margin-top: 50px; letter-spacing: 1.4px; font-weight: 500;">HALLO 👋</h1> 
+
+    <div align="center">
+        <span>N</span>
+        <span>E</span>
+        <span>Y</span>
+        <span>S</span>
+        <span>A</span>
+    </div>
+
+    <div class="musicc">
+        <audio id="myAudio" controls align="center">
+            <source src="./music/Penjaga hati - Nadhif Basalamah (Slowed Tiktok version)🎧.mp3" type="audio/mpeg">
+            Maaf lagu ini tidak tersedia
+        </audio>
+    </div>
+
+    <div id="lyrics-container">
+        <div id="lyrics">Penjaga Hati</div>
+    </div>
+
+    <script>
+        var audio = document.getElementById("myAudio");
+        var lyricsContainer = document.getElementById("lyrics-container");
+        var lyricsText = document.getElementById("lyrics");
+
+        var lyrics = [
+            {time: 15, text: "Tak sadarku temukan"},
+            {time: 20, text: "temukan wanita rupawan"},
+            {time: 24, text: "yang sadarkan"},
+            {time: 27, text: "dia seorang"},
+            {time: 28, text: "tiada lain tiada bukan hanya dia"},
+            {time: 35, text: ""},
+            {time: 42, text: "Dia buatku nyaman"},
+            {time: 46, text: ""},
+            {time: 49, text: "Dalam hangat pelukan"},
+            {time: 52, text: ""},
+            {time: 53, text: "Dia perasa"},
+            {time: 55, text: "Yang mengerti yang kurasa"},
+            {time: 59, text: "Hanya dia"},
+            {time: 61, text: ""},
+        ];
+
+        audio.addEventListener("timeupdate", function () {
+            for (var i = 0; i < lyrics.length; i++) {
+                if (audio.currentTime >= lyrics[i].time) {
+                    lyricsText.innerHTML = lyrics[i].text;
+                    var animationDuration = (lyrics[i + 1] ? lyrics[i + 1].time : audio.duration) - lyrics[i].time
+                    lyricsText.style.animation = `moveText ${animationDuration}s linear`;
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>
